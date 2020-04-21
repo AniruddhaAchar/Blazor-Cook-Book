@@ -1,0 +1,42 @@
+﻿@using CookBook.Model
+
+
+<div class="form-row">
+    <div class="col">
+        <label class="col-form-label">Cook time</label>
+    </div>
+    <div class="col">
+        <input type="text" class="form-control" placeholder="Cook time" @bind="recipe_Time.Cook_Time.Time">
+    </div>
+    <div class="col">
+        <input type="text" class="form-control" placeholder="Cook time units" @bind="recipe_Time.Cook_Time.Unit">
+    </div>
+</div>
+<div class="form-row">
+    <div class="col">
+        <label class="col-form-label">Prep time</label>
+    </div>
+    <div class="col">
+        <input type="text" class="form-control" placeholder="Prep time" @bind="recipe_Time.Prep_Time.Time">
+    </div>
+    <div class="col">
+        <input type="text" class="form-control" placeholder="Prep time units" @bind="recipe_Time.Prep_Time.Unit">
+    </div>
+</div>
+<div class="form-row">
+    <div class="col">
+        <label class="col-form-label">Rest time</label>
+    </div>
+    <div class="col">
+        <input type="text" class="form-control" placeholder="Rest time" @bind="recipe_Time.Rest_Time.Time">
+    </div>
+    <div class="col">
+        <input type="text" class="form-control" placeholder="Rest time units" @bind="recipe_Time.Rest_Time.Unit">
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public Recipe_Time recipe_Time { get; set; }
+
+}

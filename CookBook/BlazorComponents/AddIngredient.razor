@@ -1,0 +1,32 @@
+﻿
+@using CookBook.Model
+
+<div class="form-group">
+    @IngredientsRender
+    <button type="button" class="btn btn-secondary" @onclick="IncrementIngredient">Add Ingredients</button>
+</div>
+
+@code{
+    [Parameter]
+    public List<Ingredient> ingredients { get; set; }
+
+    private RenderFragment IngredientsRender { get; set; }
+    private static int renderseq = 0;
+
+    private RenderFragment CreateNAddIncredients() => builder =>
+    {
+        ingredients.Add(new Ingredient());
+        foreach (Ingredient ingredient in ingredients)
+        {
+            builder.OpenComponent<IngredientsInput>(renderseq++);
+            builder.AddAttribute(1, "ingredient", ingredient);
+            builder.CloseComponent();
+        }
+    };
+
+
+    private void IncrementIngredient()
+    {
+        IngredientsRender = CreateNAddIncredients();
+    }
+}

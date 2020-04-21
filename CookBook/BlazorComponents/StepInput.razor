@@ -1,0 +1,8 @@
+﻿@using CookBook.Model
+
+<textarea class="form-control" placeholder="Enter a step in the cooking process" @bind="step.Step_Content" />
+
+@code {
+    [Parameter]
+    public Step step { get; set; }
+}

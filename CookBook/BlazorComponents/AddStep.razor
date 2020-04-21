@@ -1,0 +1,29 @@
+﻿@using CookBook.Model
+
+<div class="form-group">
+    @StepsRender
+    <button type="button" class="btn btn-secondary" @onclick="IncreaseStep">Add Step</button>
+</div>
+
+@code{
+    private RenderFragment StepsRender { get; set; }
+    [Parameter]
+    public List<Step> steps { get; set; }
+    private static int renderseq;
+
+    private RenderFragment CreateNAddSteps() => builder =>
+    {
+        steps.Add(new Step { Step_Id = renderseq++, Step_Content=""});
+        foreach (Step step in steps)
+        {
+            builder.OpenComponent<StepInput>(renderseq);
+            builder.AddAttribute(1, "Step", step);
+            builder.CloseComponent();
+        }
+    };
+
+    private void IncreaseStep()
+    {
+        StepsRender = CreateNAddSteps();
+    }
+}

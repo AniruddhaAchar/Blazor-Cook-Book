@@ -1,0 +1,25 @@
+﻿@using CookBook.Model
+    <div class="card" style="height: 40rem;">
+        <h5 class="card-header">@recipe.Recipe_Name</h5>
+        <img class="card-img" src="@recipe.Image_Url" />
+        <div class="card-body">
+            <p class="card-text">@recipe.Description</p>
+            <button class="btn btn-primary" data-toggle="collapse" data-target="#recipeDetails" type="button" aria-expanded="true" aria-controls="recipeDetails">
+                Show recipe
+            </button>
+        </div>
+        <div class="card-footer">
+            <p class="card-text">Cook time: @recipe.Recipe_Time.Cook_Time.Time @recipe.Recipe_Time.Cook_Time.Unit</p>
+            <p class="card-text">Prep time: @recipe.Recipe_Time.Prep_Time.Time @recipe.Recipe_Time.Prep_Time.Unit</p>
+            <p class="card-text">Rest time: @recipe.Recipe_Time.Rest_Time.Time @recipe.Recipe_Time.Rest_Time.Unit</p>
+        </div>
+        <div class="collapse" id="recipeDetails">
+            <RecipeDetails recipe="@recipe" />
+        </div>
+    </div>
+
+@code {
+    [Parameter]
+    public Recipe recipe { get; set; }
+}
+

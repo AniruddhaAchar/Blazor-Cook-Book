@@ -1,0 +1,53 @@
+﻿@page "/addrecipe"
+@using CookBook.BlazorComponents
+@using CookBook.Model
+@inject CookBook.Services.RecipeService recipeService
+<h3>Add Recipe</h3>
+<EditForm OnSubmit="SubmitHandler" Model="recipe">
+    <div class="form-group">
+        <InputText @bind-Value="recipe.Recipe_Name" class="form-control" placeholder="Recipe Name" />
+        <InputTextArea @bind-Value="recipe.Description" class="form-control" placeholder="Recipe Description" rows="8" />
+        <AddIngredient ingredients="ingredients" />
+        <AddStep steps="steps" />
+        <label class="col-form-label-lg">Recipe total time</label>
+        <AddRecipeTime recipe_Time="recipe.Recipe_Time" />
+        <InputText @bind-Value="recipe.Image_Url" class="form-control" placeholder="An URL to the image" />
+    </div>
+
+    <button class="btn btn-primary" type="submit">Submit</button>
+
+</EditForm>
+
+
+@code {
+
+    private Recipe recipe;
+    private List<Step> steps;
+    private Recipe_Time recipe_Time;
+    private List<Ingredient> ingredients;
+
+
+    protected override void OnInitialized()
+    {
+        recipe = new Recipe();
+        steps = new List<Step>();
+        ingredients = new List<Ingredient>();
+        recipe_Time = new Recipe_Time{
+            Cook_Time = new Recipe_Time.Time_Holder { Time= 0, Unit= ""},
+            Prep_Time = new Recipe_Time.Time_Holder { Time= 0, Unit= ""},
+            Rest_Time = new Recipe_Time.Time_Holder { Unit= "", Time= 0}
+        };
+        recipe.Recipe_Time = recipe_Time;
+        recipe.Image_Url = "";
+    }
+
+    private async Task SubmitHandler()
+    {
+        recipe.Steps = steps;
+        recipe.Ingredients = ingredients;
+        await recipeService.CreateAsync(recipe);
+    }
+
+
+
+}

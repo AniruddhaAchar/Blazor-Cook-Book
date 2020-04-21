@@ -1,0 +1,31 @@
+﻿
+@using CookBook.Model
+
+<h6><span class="badge badge-pill badge-dark">Ingredients</span></h6>
+<div class="list-group">
+    @foreach (var ingredient in recipe.Ingredients)
+    {
+        <div class="card" style="width: 18rem;">
+            <div class="card-header">
+                @ingredient.Ingredient_Name
+            </div>
+            <div class="card-body">
+                <strong class="card-title"> Quantity: @ingredient.Quantity @ingredient.Unit</strong>
+                <p class="card-text">@ingredient.Ingredient_Prep_Type</p>
+            </div>
+        </div>
+    }
+</div>
+
+    <h6><span class="badge badge-pill badge-dark">Steps</span></h6>
+    <ul class="list-group-flush">
+        @foreach (var step in recipe.Steps)
+        {
+            <li class="list-group-item">@step.Step_Content</li>
+        }
+    </ul>
+
+    @code {
+        [Parameter]
+        public Recipe recipe { get; set; }
+    }
